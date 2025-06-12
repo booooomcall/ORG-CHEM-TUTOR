@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Alkane",
+    "symbol": "C–C",
+    "example": "Ethane (C2H6)",
+    "description": "Saturated hydrocarbons with only single bonds."
+  },
+  {
+    "name": "Alkene",
+    "symbol": "C=C",
+    "example": "Ethene (C2H4)",
+    "description": "Unsaturated hydrocarbons with one or more double bonds."
+  },
+  {
+    "name": "Alcohol",
+    "symbol": "-OH",
+    "example": "Ethanol (C2H5OH)",
+    "description": "Hydroxyl group bonded to carbon."
+  },
+  {
+    "name": "Carboxylic Acid",
+    "symbol": "-COOH",
+    "example": "Ethanoic acid (CH3COOH)",
+    "description": "Contains a carboxyl group, acidic in nature."
+  }
+]

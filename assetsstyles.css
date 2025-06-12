@@ -1,0 +1,10 @@
+﻿body {
+    background-color: #f9f9f9;
+    font-family: 'Segoe UI', sans-serif;
+}
+h1, h2 {
+    color: #003366;
+}
+section[data-testid=stSidebar] {
+    background-color: #eaf1fb;
+}
