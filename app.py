@@ -1,10 +1,10 @@
 import streamlit as st
 from pathlib import Path
-import pages.page_home as home
-import pages.page_functional_groups as fg
-import pages.page_iupac_naming as naming
-import pages.page_homologous_series as series
-import pages.page_quiz as quiz
+import modules.page_home as home
+import modules.page_functional_groups as fg
+import modules.page_iupac_naming as naming
+import modules.page_homologous_series as series
+import modules.page_quiz as quiz
 
 st.set_page_config(page_title="Organic Chemistry Tutor", page_icon="🧪", layout="wide")
 
