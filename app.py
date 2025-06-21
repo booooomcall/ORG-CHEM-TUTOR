@@ -149,6 +149,6 @@ elif menu == "📩 Feedback":
     st.title("📩 Feedback & Suggestions")
     st.markdown("We’d love to hear from you. Please fill out this short form:")
     st.components.v1.iframe(
-        "https://docs.google.com/forms/d/e/1FAIpQLSdZrs0rEmICl64s8OebmvbB4T-6qf4V8O4T2vKo2CFqFi6sjw/viewform?embedded=true",
+        "https://docs.google.com/forms/d/15UDx8Bd7edEzJCh3va_NWxFzkFgxbl6hzt7HBLxrLIs/edit",
         height=700
     )
