@@ -16,9 +16,9 @@ menu = st.sidebar.selectbox("Choose a topic", [
     "🔀 Isomers",
     "🧠 Quiz",
     "📩 Feedback",
-    "🧪 Reaction Simulations", 
     "📅 Daily Challenge",   
-    "📘 SS2 Glossary"       
+    "📘 SS2 Glossary", 
+    "🧪 Reaction Simulations"
 ])
 
 # 🏠 HOME PAGE
@@ -33,9 +33,9 @@ This app helps SS2 students master key concepts in organic chemistry:
 - 🔀 Isomers  
 - 🧠 Quiz  
 - 📩 Feedback
-- 🧪 Reaction Simulations
 - 📅 Daily Challenge
-- 📘 SS2 Glossary    
+- 📘 SS2 Glossary
+- 🧪 Reaction Simulations
     
 Use it to study, revise, or explore chemical structures interactively!
 """)
