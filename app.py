@@ -248,7 +248,6 @@ div[data-testid="stExpander"] > summary:hover {
 # ------------------ REACTION SIMULATIONS ------------------
 elif menu == "🧪 Reaction Simulations":
     st.title("🧪 Organic Reaction Simulations")
-
     reactions = {
         "Substitution": {
             "desc": "An atom or group in a molecule is replaced by another atom/group.",
