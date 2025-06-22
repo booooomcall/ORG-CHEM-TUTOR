@@ -18,7 +18,6 @@ menu = st.sidebar.selectbox("Choose a topic", [
     "📩 Feedback", 
     "📅 Daily Challenge",   
     "📘 SS2 Glossary"       
-    "🎮 Name It Fast"
 ])
 
 # 🏠 HOME PAGE
@@ -35,7 +34,6 @@ This app helps SS2 students master key concepts in organic chemistry:
 - 📩 Feedback
 - 📅 Daily Challenge
 - 📘 SS2 Glossary    
-- 🎮 Name It Fast
     
 Use it to study, revise, or explore chemical structures interactively!
 """)
@@ -244,6 +242,8 @@ div[data-testid="stExpander"] > summary:hover {
 }
 </style>
 """, unsafe_allow_html=True)
+
+
 elif menu == "🎮 Name It Fast":
     st.title("🎮 Name It Fast Challenge!")
     st.markdown("You have 60 seconds to name as many compounds as possible. Ready?")
