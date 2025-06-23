@@ -201,3 +201,6 @@ elif menu == "📘 SS2 Glossary":
         if search.lower() in term.lower():
             with st.expander(term):
                 st.write(definition)
+
+elif menu == "name It fast":
+    import name_it_fast
