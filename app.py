@@ -128,8 +128,6 @@ elif menu == "🔀 Isomers":
 - **Geometric Isomers** – cis-but-2-ene vs trans-but-2-ene
 - **Optical Isomers** – Lactic acid mirror images
 
-![Cis-Transhttps://tuitiontube.com/wp-content/uploads/2016/11/Determination-of-configuration-of-cis-trans-Isomers-chemical-method.png)
-
 | Type       | Description                  | Example                 |
 |------------|------------------------------|--------------------------|
 | Chain      | Carbon skeleton differences   | Butane vs Isobutane      |
