@@ -9,7 +9,7 @@ import datetime
 st.set_page_config(page_title="Organic Chemistry Tutor", page_icon="🧪", layout="wide")
 
 # Sidebar setup
-st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Chemical_structure.svg/1024px-Chemical_structure.svg.png", width=100)
+st.sidebar.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHSwe3LbY4YbdwAcbM77kkHb4SA45mBrWQ0Q&s", width=100)
 st.sidebar.title("🧪 Chemistry Tutor")
 menu = st.sidebar.selectbox("Choose a topic", [
     "🏠 Home",
@@ -120,7 +120,7 @@ elif menu == "🔀 Isomers":
 - **Position Isomers** – Butan-1-ol vs Butan-2-ol
 - **Functional Isomers** – Alcohol vs Ether
 
-![Chain Isomers](https://chem.libretexts.org/@api/deki/files/11070/clipboard_e0d7a06c176445c5ef94eec70d233c259.png)
+![Chain Isomers](https://www.science-revision.co.uk/images/hexane%20and%20branched%20chainv2.jpg)
 
 ---
 
