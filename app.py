@@ -128,7 +128,7 @@ elif menu == "🔀 Isomers":
 - **Geometric Isomers** – cis-but-2-ene vs trans-but-2-ene
 - **Optical Isomers** – Lactic acid mirror images
 
-![Cis-Trans]https://chemistrytalk.org/wp-content/uploads/2023/03/Geometric_cis-trans_isomers_in_alkenes-1.png)
+![Cis-Trans]https://i.sstatic.net/8uVab.png)
 
 | Type       | Description                  | Example                 |
 |------------|------------------------------|--------------------------|
