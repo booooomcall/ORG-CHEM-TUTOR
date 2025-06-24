@@ -1,6 +1,9 @@
 import streamlit as st
 from io import BytesIO
 import qrcode
+import random
+import time
+import datetime
 
 # App setup
 st.set_page_config(page_title="Organic Chemistry Tutor", page_icon="🧪", layout="wide")
@@ -16,9 +19,22 @@ menu = st.sidebar.selectbox("Choose a topic", [
     "🔀 Isomers",
     "🧠 Quiz",
     "📩 Feedback", 
-    "📅 Daily Challenge",   
-    "📘 SS2 Glossary"       
+    "🗕️ Daily Challenge",   
+    "📘 SS2 Glossary",      
+    "🎮 Name It Fast Game"
 ])
+
+# Initialize game session state
+if 'scoreboard' not in st.session_state:
+    st.session_state.scoreboard = []
+if 'current_score' not in st.session_state:
+    st.session_state.current_score = 0
+if 'start_time' not in st.session_state:
+    st.session_state.start_time = 0
+if 'game_started' not in st.session_state:
+    st.session_state.game_started = False
+if 'current_question' not in st.session_state:
+    st.session_state.current_question = ""
 
 # 🏠 HOME PAGE
 if menu == "🏠 Home":
@@ -32,8 +48,8 @@ This app helps SS2 students master key concepts in organic chemistry:
 - 🔀 Isomers  
 - 🧠 Quiz  
 - 📩 Feedback
-- 📅 Daily Challenge
-- 📘 SS2 Glossary    
+- 🗕️ Daily Challenge
+- 📘 SS2 Glossary
     
 Use it to study, revise, or explore chemical structures interactively!
 """)
@@ -123,30 +139,64 @@ elif menu == "🔀 Isomers":
 | Optical    | Non-superimposable mirror images | Lactic acid isomers  |
 """)
 
-# 🧠 QUIZ
-elif menu == "🧠 Quiz":
-    st.title("🧠 Organic Chemistry Quiz")
+# 🎮 NAME IT FAST GAME
+elif menu == "🎮 Name It Fast Game":
+    st.title("🎮 Name It Fast: Chemistry Edition")
 
-    questions = [
-        {"q":"General formula for alkanes?", "a":"CₙH₂ₙ₊₂", "opts":["CₙH₂ₙ", "CₙH₂ₙ₊₂", "CₙH₂ₙ₋₂"]},
-        {"q":"Functional group in ethanol?", "a":"Alcohol", "opts":["Alkane", "Alcohol", "Ester"]},
-        {"q":"Triple bond compound?", "a":"Alkyne", "opts":["Alkane", "Alkene", "Alkyne"]},
-        {"q":"Suffix for aldehyde?", "a":"-al", "opts":["-ol", "-al", "-one"]},
-        {"q":"Which is a carboxylic acid?", "a":"CH3COOH", "opts":["CH3OH", "CH3CH3", "CH3COOH"]},
-    ]
+    mode = st.selectbox("Choose Game Mode:", ["Functional Group Flash", "IUPAC Sprint"])
 
-    score = 0
-    for i, q in enumerate(questions):
-        st.subheader(f"{i+1}. {q['q']}")
-        user_answer = st.radio("Choose one:", q["opts"], key=i, index=None)
-        if user_answer:
-            if user_answer == q["a"]:
-                st.success("✅ Correct!")
-                score += 1
-            else:
-                st.error(f"❌ Wrong. Correct answer: {q['a']}")
+    questions_data = {
+        "Functional Group Flash": [
+            {"q": "-OH", "a": "Alcohol"},
+            {"q": "-COOH", "a": "Carboxylic Acid"},
+            {"q": "-CHO", "a": "Aldehyde"},
+            {"q": "-NH2", "a": "Amine"},
+            {"q": "C=C", "a": "Alkene"}
+        ],
+        "IUPAC Sprint": [
+            {"q": "CH3COOH", "a": "Ethanoic Acid"},
+            {"q": "CH3CH2OH", "a": "Ethanol"},
+            {"q": "C2H4", "a": "Ethene"},
+            {"q": "CH3CHO", "a": "Ethanal"},
+            {"q": "CH4", "a": "Methane"}
+        ]
+    }
 
-    st.markdown(f"### 🏁 Final Score: **{score}/{len(questions)}**")
+    if st.button("Start Game") or st.session_state.game_started:
+        if not st.session_state.game_started:
+            st.session_state.game_started = True
+            st.session_state.current_score = 0
+            st.session_state.start_time = time.time()
+            st.session_state.questions = random.sample(questions_data[mode], len(questions_data[mode]))
+            st.session_state.current_index = 0
+
+        if st.session_state.current_index < len(st.session_state.questions):
+            current = st.session_state.questions[st.session_state.current_index]
+            st.subheader(f"What does this represent: **{current['q']}**")
+            answer = st.text_input("Your Answer:", key='answer_input')
+            if st.button("Submit"):
+                if answer.strip().lower() == current['a'].lower():
+                    st.success("Correct!")
+                    st.session_state.current_score += 1
+                else:
+                    st.error(f"Wrong! Correct answer: {current['a']}")
+                st.session_state.current_index += 1
+                st.experimental_rerun()
+        else:
+            duration = round(time.time() - st.session_state.start_time, 2)
+            st.balloons()
+            st.success(f"Game Over! Score: {st.session_state.current_score}/{len(st.session_state.questions)} in {duration} seconds")
+            st.session_state.scoreboard.append({
+                "mode": mode,
+                "score": st.session_state.current_score,
+                "time": duration
+            })
+            st.session_state.game_started = False
+
+    if st.session_state.scoreboard:
+        st.subheader("🏋️ Your Score History")
+        for entry in st.session_state.scoreboard[::-1]:
+            st.markdown(f"- Mode: **{entry['mode']}** | Score: **{entry['score']}** | Time: **{entry['time']}s**")
 
 # 📩 FEEDBACK
 elif menu == "📩 Feedback":
@@ -157,12 +207,11 @@ elif menu == "📩 Feedback":
         height=700
     )
 
-elif menu == "📅 Daily Challenge":
+# 🗕️ DAILY CHALLENGE
+elif menu == "🗕️ Daily Challenge":
     st.title("📅 Daily Challenge")
-    import datetime
     today = datetime.date.today()
     seed = today.toordinal()
-    import random
     random.seed(seed)
 
     daily_questions = [
@@ -170,7 +219,7 @@ elif menu == "📅 Daily Challenge":
         {"q": "What is the suffix for an alcohol?", "a": "-ol", "opts": ["-one", "-al", "-ol"]},
         {"q": "What is the IUPAC name for CH3CH=CH2?", "a": "Propene", "opts": ["Propane", "Propene", "Propyne"]},
         {"q": "Which group is represented by -COOH?", "a": "Carboxylic Acid", "opts": ["Alcohol", "Carboxylic Acid", "Amine"]},
-        {"q": "What type of isomerism involves spatial arrangement around double bonds?", "a": "Geometric", "opts": ["Chain", "Geometric", "Optical"]},
+        {"q": "What type of isomerism involves spatial arrangement around double bonds?", "a": "Geometric", "opts": ["Chain", "Geometric", "Optical"]}
     ]
     challenge = random.choice(daily_questions)
     st.subheader(challenge["q"])
@@ -181,6 +230,7 @@ elif menu == "📅 Daily Challenge":
         else:
             st.error(f"❌ Incorrect. The correct answer is: {challenge['a']}")
 
+# 📘 SS2 GLOSSARY
 elif menu == "📘 SS2 Glossary":
     st.title("📘 SS2 Chemistry Glossary")
     terms = {
@@ -201,6 +251,3 @@ elif menu == "📘 SS2 Glossary":
         if search.lower() in term.lower():
             with st.expander(term):
                 st.write(definition)
-
-elif menu == "name It fast":
-    import name_it_fast
